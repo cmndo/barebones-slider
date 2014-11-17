@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery.barebones-1.1.js"></script>
+<meta charset=utf-8 />
+<title>Barebones jQuery Feature Slider</title>
+<style>
+	body {
+		margin: 0;
+		padding-left: 150px;
+		padding-right: 90px;
+	}
+</style>
+</head>
+<body>
+	<h1>Barebones Feature Slider</h1>
+	<h2>An unassuming feature slider plugin for jQuery</h2>
+	<p>Finding a feature slider to use is way harder than it should be. There are a lot of them out here already and they all seem to be packed with features. If you don't want a lot of features, customizing one to your liking can be the most frustrating thing ever. Barebones is a fresh start.</p>
+
+	<h4>How does it work?</h4>
+	<p>Target the element that holds the content of your slides. Then</p>
+	<pre>var example = $('.wrapper').barebones()</pre>
+	<p>Then all you have to do is call example.next() and example.back() to move forward and backward</p>
+	<p>use jQuery events to listen for slideChange to detect when the slide changes.</p>
+	<pre>
+example.on('slideChange', function(evt, slide){
+	console.log("Changed to slide " + slide + ".");
+});
+	
+	</pre>
+	<h4>Try it out</h4>
+	<p>
+		<style type="text/css">
+			/* Specify outter wrapper for all ui elements */
+			.example-wrapper{
+				max-width: 500px;
+				width: 100%;
+				position: relative;
+			}
+
+			/* REQUIRED: Specify how big you want the slides to be*/
+			.feature-slider {
+				width: 100%;
+				height: 300px;
+			}
+				.feature-slider img {
+					width: 100%;
+				}
+
+			/* Style your buttons */
+			.backBtn {
+				float:left;
+			}
+			.nextBtn {
+				float: right;
+			}
+			
+			
+		</style>
+		<div class="example-wrapper">
+			<a href="#" class="backBtn">Back</a>
+			<a href="#" class="nextBtn">Next</a>
+			<div class="feature-slider">
+				<img src="img/300.jpg">
+				<img src="img/302.jpg">
+				<img src="img/304.jpg">
+				<img src="img/306.jpg">
+				<img src="img/308.jpg">
+			</div>
+		</div>
+		
+	</p>
+	
+	<h4>What's left to do?</h4>
+	<p>I've done some work with pointer events. I will impelment those so touch swiping works - Here's my code for that <a href="http://codepen.io/cmndo/pen/tLHed" target="_blank">http://codepen.io/cmndo/pen/tLHed</a></p>
+
+	<script type="text/javascript">
+		(function($){
+			//create an instance of the slider
+			var example = $('.feature-slider').barebones();
+
+			//handle next and back myself
+			$('.nextBtn').click(example.next);
+			$('.backBtn').click(example.back);
+
+			//listen for a change if i need it connected to pagination
+			example.on('slideChange', function(evt, slide){
+				console.log("Changed to slide " + slide + ".");
+			});
+
+		})(jQuery);
+	</script>
+</body>
+</html>
